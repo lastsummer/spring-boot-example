@@ -13,15 +13,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.models.media.MediaType;
+
 import java.util.List;
 
+@Api(tags = "User")
 @RestController
 public class UserController {
 	
 	@Autowired
 	private UserDaoService service;
 
-	@GetMapping("/users")
+	
+	@Operation(summary = "取得所有的user")
+	/*
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Found the book", 
+				    content = { @Content(mediaType = "application/json", 
+				      schema = @Schema(implementation = User.class)) }) })
+				      */
+	@GetMapping(value = "/users", produces = { "application/json", "application/xml" })
 	public List<User> retrueveAllUsers(){
 		return service.findAll();
 	}

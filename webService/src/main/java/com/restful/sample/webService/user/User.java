@@ -5,13 +5,19 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description="使用者的詳細內容")
 public class User {
 	private Integer id;
 	
 	@Size(min=2, message="至少需要輸入2個字母")
+	@ApiModelProperty(notes="至少需要輸入2個字母")
 	private String name;
 	
 	@Past
+	@ApiModelProperty(notes="生日必須填小於現在時間")
 	private Date birthDate;
 	public User(Integer id, String name, Date birthDate) {
 		super();
